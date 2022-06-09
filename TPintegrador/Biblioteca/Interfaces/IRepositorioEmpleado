@@ -1,6 +1,5 @@
-using Biblioteca;
-using System;
-using System.Collections.Generic;
+namespace Biblioteca;
+
 public interface IRepositorioEmpleado{
     void AgregarEmpleado(Empleado empleado);
     List<Empleado>GetEmpleados();
@@ -8,3 +7,4 @@ public interface IRepositorioEmpleado{
     void ModificarEmpleado(Empleado empleado);
     void EliminarEmpleado(int DNI);
 }
+
