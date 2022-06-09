@@ -8,6 +8,7 @@ public class RepositorioClienteArchTexto:IRepositorioCliente{
     public void AgregarCliente(Cliente cliente){
             using (StreamWriter sw = File.AppendText("Clientes.txt")){
                 sw.WriteLine($"{cliente.documento}|{cliente.nombre}|{cliente.apellido}|{cliente.direccion}|{cliente.fecha_nacimiento}|{cliente.fecha_compra}");
+                Console.WriteLine("***********  Cliente Agregado Correctamente  ***********");
             }          
     }
     public List<Cliente>GetClientes(){
@@ -86,6 +87,7 @@ public class RepositorioClienteArchTexto:IRepositorioCliente{
         sr.Close();
         File.Delete("Clientes.txt");
         File.Move("temporal.txt","Clientes.txt");
+        Console.WriteLine("*****Cliente modificado exitosamente *****");
     }
 
     public void EliminarCliente(int Dni){
@@ -93,29 +95,20 @@ public class RepositorioClienteArchTexto:IRepositorioCliente{
         StreamReader sr = new StreamReader("Clientes.txt");
         string? linea;
         string[] campos = new string[5];
-        bool ok=false;
         while(!sr.EndOfStream){
             linea = sr.ReadLine();
             if(linea != null){
                 campos = linea.Split('|');
             }
-            if(Int32.Parse(campos[0]) == Dni){
-                ok=true;; 
-            }
-            else{
+            if(Int32.Parse(campos[0]) != Dni){
                 sw.WriteLine(linea);
             }
-        }
-        if(ok == false){
-            Console.WriteLine("El dni no esta en el archivo");
         }
         sw.Close();
         sr.Close();
         File.Delete("Clientes.txt");
         File.Move("temporal.txt","Clientes.txt");
-        
+        Console.WriteLine("***********  Cliente Eliminado Correctamente  ***********");
     }
     }
-
 }
-
